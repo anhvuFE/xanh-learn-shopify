@@ -28,6 +28,7 @@ export default function App() {
         <Link to="/app/products">Products</Link>
         <Link to="/app/customers">Customers</Link>
         <Link to="/app/orders">Orders</Link>
+        <Link to="/app/inventory/alerts">Inventory Alerts</Link>
         <Link to="/app/additional">Additional page</Link>
       </NavMenu>
       <Outlet />
