@@ -18,7 +18,8 @@ import {
   Icon,
   Select,
   TextField,
-} from '@shopify/polaris';
+} from "@shopify/polaris";
+import type { BadgeProps } from "@shopify/polaris";
 import {
   EditIcon,
   EmailIcon,
@@ -32,13 +33,13 @@ import {
   ClockIcon,
   NoteIcon,
   ImageIcon,
-} from '@shopify/polaris-icons';
-import { TitleBar } from '@shopify/app-bridge-react';
-import { useLoaderData, useParams, useNavigate } from '@remix-run/react';
-import type { LoaderFunctionArgs } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import { authenticate } from '../shopify.server';
-import { useState } from 'react';
+} from "@shopify/polaris-icons";
+import { TitleBar } from "@shopify/app-bridge-react";
+import { useLoaderData, useParams, useNavigate } from "@remix-run/react";
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { authenticate } from "../shopify.server";
+import { useState } from "react";
 
 // Loader to fetch order data by ID
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -50,122 +51,124 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const order = {
     id: orderId,
     name: `#${orderId}`,
-    email: 'john.doe@example.com',
+    email: "john.doe@example.com",
     customer: {
-      id: '1',
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      phone: '+1-555-0123',
+      id: "1",
+      firstName: "John",
+      lastName: "Doe",
+      email: "john.doe@example.com",
+      phone: "+1-555-0123",
       totalOrders: 12,
       totalSpent: 1245.67,
     },
-    createdAt: '2024-01-25T10:30:00Z',
-    updatedAt: '2024-01-25T14:45:00Z',
-    processedAt: '2024-01-25T10:30:00Z',
-    financialStatus: 'paid' as const,
-    fulfillmentStatus: 'fulfilled' as const,
-    currency: 'USD',
-    subtotalPrice: 110.00,
-    totalShipping: 10.00,
-    totalTax: 5.50,
-    totalPrice: 125.50,
+    createdAt: "2024-01-25T10:30:00Z",
+    updatedAt: "2024-01-25T14:45:00Z",
+    processedAt: "2024-01-25T10:30:00Z",
+    financialStatus: "paid" as const,
+    fulfillmentStatus: "fulfilled" as const,
+    currency: "USD",
+    subtotalPrice: 110.0,
+    totalShipping: 10.0,
+    totalTax: 5.5,
+    totalPrice: 125.5,
     totalDiscounts: 0,
     refundedAmount: 0,
-    tags: ['priority', 'vip-customer'],
-    note: 'Customer requested gift wrapping. Handle with care.',
+    tags: ["priority", "vip-customer"],
+    note: "Customer requested gift wrapping. Handle with care.",
     shippingAddress: {
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'Doe Enterprises',
-      address1: '123 Main St',
-      address2: 'Suite 456',
-      city: 'New York',
-      province: 'NY',
-      country: 'United States',
-      zip: '10001',
-      phone: '+1-555-0123',
+      firstName: "John",
+      lastName: "Doe",
+      company: "Doe Enterprises",
+      address1: "123 Main St",
+      address2: "Suite 456",
+      city: "New York",
+      province: "NY",
+      country: "United States",
+      zip: "10001",
+      phone: "+1-555-0123",
     },
     billingAddress: {
-      firstName: 'John',
-      lastName: 'Doe',
-      company: 'Doe Enterprises',
-      address1: '123 Main St',
-      address2: 'Suite 456',
-      city: 'New York',
-      province: 'NY',
-      country: 'United States',
-      zip: '10001',
-      phone: '+1-555-0123',
+      firstName: "John",
+      lastName: "Doe",
+      company: "Doe Enterprises",
+      address1: "123 Main St",
+      address2: "Suite 456",
+      city: "New York",
+      province: "NY",
+      country: "United States",
+      zip: "10001",
+      phone: "+1-555-0123",
     },
     lineItems: [
       {
-        id: '1',
-        title: 'Premium Cotton T-Shirt',
-        variantTitle: 'Medium / Black',
-        sku: 'PCT-M-BLK',
+        id: "1",
+        title: "Premium Cotton T-Shirt",
+        variantTitle: "Medium / Black",
+        sku: "PCT-M-BLK",
         quantity: 1,
         price: 29.99,
         totalPrice: 29.99,
-        image: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png',
+        image:
+          "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png",
         requiresShipping: true,
         taxable: true,
-        fulfillmentStatus: 'fulfilled',
+        fulfillmentStatus: "fulfilled",
       },
       {
-        id: '2',
-        title: 'Wireless Bluetooth Headphones',
-        variantTitle: 'Black',
-        sku: 'WBH-BLK',
+        id: "2",
+        title: "Wireless Bluetooth Headphones",
+        variantTitle: "Black",
+        sku: "WBH-BLK",
         quantity: 1,
         price: 80.01,
         totalPrice: 80.01,
-        image: 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-2_large.png',
+        image:
+          "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-2_large.png",
         requiresShipping: true,
         taxable: true,
-        fulfillmentStatus: 'fulfilled',
+        fulfillmentStatus: "fulfilled",
       },
     ],
     fulfillments: [
       {
-        id: '1',
-        status: 'success',
-        createdAt: '2024-01-26T09:00:00Z',
-        trackingCompany: 'FedEx',
-        trackingNumber: '123456789',
-        trackingUrl: 'https://www.fedex.com/track?123456789',
-        lineItems: ['1', '2'],
+        id: "1",
+        status: "success",
+        createdAt: "2024-01-26T09:00:00Z",
+        trackingCompany: "FedEx",
+        trackingNumber: "123456789",
+        trackingUrl: "https://www.fedex.com/track?123456789",
+        lineItems: ["1", "2"],
       },
     ],
     transactions: [
       {
-        id: '1',
-        kind: 'sale',
-        status: 'success',
-        amount: 125.50,
-        currency: 'USD',
-        gateway: 'Shopify Payments',
-        createdAt: '2024-01-25T10:31:00Z',
+        id: "1",
+        kind: "sale",
+        status: "success",
+        amount: 125.5,
+        currency: "USD",
+        gateway: "Shopify Payments",
+        createdAt: "2024-01-25T10:31:00Z",
       },
     ],
     timeline: [
       {
-        id: '1',
-        event: 'Order created',
-        createdAt: '2024-01-25T10:30:00Z',
-        message: 'Order was created',
+        id: "1",
+        event: "Order created",
+        createdAt: "2024-01-25T10:30:00Z",
+        message: "Order was created",
       },
       {
-        id: '2',
-        event: 'Payment received',
-        createdAt: '2024-01-25T10:31:00Z',
-        message: 'Payment of $125.50 was successfully processed',
+        id: "2",
+        event: "Payment received",
+        createdAt: "2024-01-25T10:31:00Z",
+        message: "Payment of $125.50 was successfully processed",
       },
       {
-        id: '3',
-        event: 'Order fulfilled',
-        createdAt: '2024-01-26T09:00:00Z',
-        message: 'All items have been fulfilled and shipped',
+        id: "3",
+        event: "Order fulfilled",
+        createdAt: "2024-01-26T09:00:00Z",
+        message: "All items have been fulfilled and shipped",
       },
     ],
   };
@@ -189,8 +192,15 @@ type Order = {
   createdAt: string;
   updatedAt: string;
   processedAt: string;
-  financialStatus: 'authorized' | 'paid' | 'partially_paid' | 'partially_refunded' | 'pending' | 'refunded' | 'voided';
-  fulfillmentStatus: 'fulfilled' | 'unfulfilled' | 'partial' | 'restocked';
+  financialStatus:
+    | "authorized"
+    | "paid"
+    | "partially_paid"
+    | "partially_refunded"
+    | "pending"
+    | "refunded"
+    | "voided";
+  fulfillmentStatus: "fulfilled" | "unfulfilled" | "partial" | "restocked";
   currency: string;
   subtotalPrice: number;
   totalShipping: number;
@@ -267,54 +277,62 @@ export default function OrderDetailPage() {
   const { order } = useLoaderData<{ order: Order }>();
   const params = useParams();
   const navigate = useNavigate();
-  const [internalNote, setInternalNote] = useState('');
+  const [internalNote, setInternalNote] = useState("");
+
+  type StatusBadge = { tone?: BadgeProps["tone"]; text: string };
 
   // Format currency
-  const formatCurrency = (amount: number, currency: string = 'USD') => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
+  const formatCurrency = (amount: number, currency: string = "USD") => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency,
     }).format(amount);
   };
 
   // Format date time
   const formatDateTime = (dateString: string) => {
-    return new Date(dateString).toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Date(dateString).toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
   // Get financial status badge
-  const getFinancialStatusBadge = (status: string) => {
+  const getFinancialStatusBadge = (status: string): StatusBadge | undefined => {
     const statusMap = {
-      authorized: { tone: 'info' as const, text: 'Authorized' },
-      paid: { tone: 'success' as const, text: 'Paid' },
-      partially_paid: { tone: 'warning' as const, text: 'Partially paid' },
-      partially_refunded: { tone: 'warning' as const, text: 'Partially refunded' },
-      pending: { tone: 'warning' as const, text: 'Pending' },
-      refunded: { tone: 'critical' as const, text: 'Refunded' },
-      voided: { tone: 'subdued' as const, text: 'Voided' },
-    };
-    return statusMap[status as keyof typeof statusMap];
+      authorized: { tone: "info", text: "Authorized" },
+      paid: { tone: "success", text: "Paid" },
+      partially_paid: { tone: "warning", text: "Partially paid" },
+      partially_refunded: { tone: "warning", text: "Partially refunded" },
+      pending: { tone: "warning", text: "Pending" },
+      refunded: { tone: "critical", text: "Refunded" },
+      voided: { text: "Voided" },
+    } satisfies Record<string, StatusBadge>;
+
+    if (status in statusMap) return statusMap[status as keyof typeof statusMap];
+    return undefined;
   };
 
   // Get fulfillment status badge
-  const getFulfillmentStatusBadge = (status: string) => {
+  const getFulfillmentStatusBadge = (
+    status: string,
+  ): StatusBadge | undefined => {
     const statusMap = {
-      fulfilled: { tone: 'success' as const, text: 'Fulfilled' },
-      unfulfilled: { tone: 'subdued' as const, text: 'Unfulfilled' },
-      partial: { tone: 'warning' as const, text: 'Partially fulfilled' },
-      restocked: { tone: 'info' as const, text: 'Restocked' },
-    };
-    return statusMap[status as keyof typeof statusMap];
+      fulfilled: { tone: "success", text: "Fulfilled" },
+      unfulfilled: { text: "Unfulfilled" },
+      partial: { tone: "warning", text: "Partially fulfilled" },
+      restocked: { tone: "info", text: "Restocked" },
+    } satisfies Record<string, StatusBadge>;
+
+    if (status in statusMap) return statusMap[status as keyof typeof statusMap];
+    return undefined;
   };
 
   // Format address
-  const formatAddress = (address: Order['shippingAddress']) => {
+  const formatAddress = (address: Order["shippingAddress"]) => {
     return (
       <>
         <Text as="p" variant="bodyMd" fontWeight="semibold">
@@ -374,39 +392,44 @@ export default function OrderDetailPage() {
 
   return (
     <Page
-      backAction={{ content: 'Orders', onAction: () => navigate('/app/orders') }}
+      backAction={{
+        content: "Orders",
+        onAction: () => navigate("/app/orders"),
+      }}
       title={order.name}
       titleMetadata={
         <InlineStack gap="200">
           <Badge tone={getFinancialStatusBadge(order.financialStatus)?.tone}>
             {getFinancialStatusBadge(order.financialStatus)?.text}
           </Badge>
-          <Badge tone={getFulfillmentStatusBadge(order.fulfillmentStatus)?.tone}>
+          <Badge
+            tone={getFulfillmentStatusBadge(order.fulfillmentStatus)?.tone}
+          >
             {getFulfillmentStatusBadge(order.fulfillmentStatus)?.text}
           </Badge>
         </InlineStack>
       }
       primaryAction={{
-        content: 'Fulfill order',
-        disabled: order.fulfillmentStatus === 'fulfilled',
-        onAction: () => console.log('Fulfill order'),
+        content: "Fulfill order",
+        disabled: order.fulfillmentStatus === "fulfilled",
+        onAction: () => console.log("Fulfill order"),
       }}
       secondaryActions={[
         {
-          content: 'Print',
+          content: "Print",
           icon: PrintIcon,
           onAction: () => window.print(),
         },
         {
-          content: 'Duplicate',
+          content: "Duplicate",
           icon: DuplicateIcon,
-          onAction: () => console.log('Duplicate order'),
+          onAction: () => console.log("Duplicate order"),
         },
         {
-          content: 'Cancel order',
+          content: "Cancel order",
           icon: XIcon,
           destructive: true,
-          onAction: () => console.log('Cancel order'),
+          onAction: () => console.log("Cancel order"),
         },
       ]}
     >
@@ -415,7 +438,11 @@ export default function OrderDetailPage() {
           <BlockStack gap="400">
             {/* Order Summary Header */}
             <Card>
-              <Box padding="400" background="bg-surface-secondary" borderRadius="300">
+              <Box
+                padding="400"
+                background="bg-surface-secondary"
+                borderRadius="300"
+              >
                 <InlineGrid columns={{ xs: 1, sm: 2, md: 4 }} gap="400">
                   <BlockStack gap="300">
                     <Box>
@@ -445,7 +472,11 @@ export default function OrderDetailPage() {
                           <Text as="p" variant="bodySm" tone="subdued">
                             Total amount
                           </Text>
-                          <Text as="p" variant="headingMd" fontWeight="semibold">
+                          <Text
+                            as="p"
+                            variant="headingMd"
+                            fontWeight="semibold"
+                          >
                             {formatCurrency(order.totalPrice, order.currency)}
                           </Text>
                         </BlockStack>
@@ -482,7 +513,8 @@ export default function OrderDetailPage() {
                             Ship to
                           </Text>
                           <Text as="p" variant="bodyMd" fontWeight="semibold">
-                            {order.shippingAddress.city}, {order.shippingAddress.province}
+                            {order.shippingAddress.city},{" "}
+                            {order.shippingAddress.province}
                           </Text>
                         </BlockStack>
                       </InlineStack>
@@ -500,8 +532,8 @@ export default function OrderDetailPage() {
                 </Text>
 
                 <DataTable
-                  columnContentTypes={['text', 'numeric', 'numeric', 'numeric']}
-                  headings={['Product', 'Price', 'Quantity', 'Total']}
+                  columnContentTypes={["text", "numeric", "numeric", "numeric"]}
+                  headings={["Product", "Price", "Quantity", "Total"]}
                   rows={lineItemRows}
                 />
 
@@ -517,7 +549,10 @@ export default function OrderDetailPage() {
                             Subtotal
                           </Text>
                           <Text as="p" variant="bodyMd">
-                            {formatCurrency(order.subtotalPrice, order.currency)}
+                            {formatCurrency(
+                              order.subtotalPrice,
+                              order.currency,
+                            )}
                           </Text>
                         </InlineStack>
 
@@ -527,7 +562,11 @@ export default function OrderDetailPage() {
                               Discount
                             </Text>
                             <Text as="p" variant="bodyMd" tone="success">
-                              -{formatCurrency(order.totalDiscounts, order.currency)}
+                              -
+                              {formatCurrency(
+                                order.totalDiscounts,
+                                order.currency,
+                              )}
                             </Text>
                           </InlineStack>
                         )}
@@ -537,7 +576,10 @@ export default function OrderDetailPage() {
                             Shipping
                           </Text>
                           <Text as="p" variant="bodyMd">
-                            {formatCurrency(order.totalShipping, order.currency)}
+                            {formatCurrency(
+                              order.totalShipping,
+                              order.currency,
+                            )}
                           </Text>
                         </InlineStack>
 
@@ -553,10 +595,18 @@ export default function OrderDetailPage() {
                         <Divider />
 
                         <InlineStack align="space-between">
-                          <Text as="p" variant="headingMd" fontWeight="semibold">
+                          <Text
+                            as="p"
+                            variant="headingMd"
+                            fontWeight="semibold"
+                          >
                             Total
                           </Text>
-                          <Text as="p" variant="headingMd" fontWeight="semibold">
+                          <Text
+                            as="p"
+                            variant="headingMd"
+                            fontWeight="semibold"
+                          >
                             {formatCurrency(order.totalPrice, order.currency)}
                           </Text>
                         </InlineStack>
@@ -567,7 +617,11 @@ export default function OrderDetailPage() {
                               Refunded
                             </Text>
                             <Text as="p" variant="bodyMd" tone="critical">
-                              -{formatCurrency(order.refundedAmount, order.currency)}
+                              -
+                              {formatCurrency(
+                                order.refundedAmount,
+                                order.currency,
+                              )}
                             </Text>
                           </InlineStack>
                         )}
@@ -589,15 +643,23 @@ export default function OrderDetailPage() {
                   Customer
                 </Text>
 
-                <Box padding="400" background="bg-surface-secondary" borderRadius="200">
+                <Box
+                  padding="400"
+                  background="bg-surface-secondary"
+                  borderRadius="200"
+                >
                   <BlockStack gap="300">
-                    <Link url={`/app/customers/${order.customer.id}`} removeUnderline>
+                    <Link
+                      url={`/app/customers/${order.customer.id}`}
+                      removeUnderline
+                    >
                       <Text as="span" variant="bodyMd" fontWeight="semibold">
                         {order.customer.firstName} {order.customer.lastName}
                       </Text>
                     </Link>
                     <Text as="p" variant="bodySm" tone="subdued">
-                      {order.customer.totalOrders} orders • {formatCurrency(order.customer.totalSpent)}
+                      {order.customer.totalOrders} orders •{" "}
+                      {formatCurrency(order.customer.totalSpent)}
                     </Text>
                     <Divider />
                     <BlockStack gap="200">
@@ -605,7 +667,10 @@ export default function OrderDetailPage() {
                         <Box>
                           <Icon source={EmailIcon} tone="subdued" />
                         </Box>
-                        <Link url={`mailto:${order.customer.email}`} removeUnderline>
+                        <Link
+                          url={`mailto:${order.customer.email}`}
+                          removeUnderline
+                        >
                           <Text as="span" variant="bodySm">
                             {order.customer.email}
                           </Text>
@@ -639,7 +704,11 @@ export default function OrderDetailPage() {
                   </Button>
                 </InlineStack>
 
-                <Box padding="300" background="bg-surface-secondary" borderRadius="200">
+                <Box
+                  padding="300"
+                  background="bg-surface-secondary"
+                  borderRadius="200"
+                >
                   <BlockStack gap="100">
                     {formatAddress(order.shippingAddress)}
                   </BlockStack>
@@ -659,7 +728,11 @@ export default function OrderDetailPage() {
                   </Button>
                 </InlineStack>
 
-                <Box padding="300" background="bg-surface-secondary" borderRadius="200">
+                <Box
+                  padding="300"
+                  background="bg-surface-secondary"
+                  borderRadius="200"
+                >
                   <BlockStack gap="100">
                     {formatAddress(order.billingAddress)}
                   </BlockStack>
@@ -730,7 +803,11 @@ export default function OrderDetailPage() {
                             <Text as="p" variant="bodySm" fontWeight="semibold">
                               {fulfillment.trackingCompany}
                             </Text>
-                            <Link url={fulfillment.trackingUrl} external removeUnderline>
+                            <Link
+                              url={fulfillment.trackingUrl}
+                              external
+                              removeUnderline
+                            >
                               <Text as="span" variant="bodySm">
                                 {fulfillment.trackingNumber}
                               </Text>
@@ -761,10 +838,15 @@ export default function OrderDetailPage() {
                     <BlockStack gap="200">
                       <InlineStack align="space-between">
                         <Badge tone="success">
-                          {transaction.status === 'success' ? 'Paid' : transaction.status}
+                          {transaction.status === "success"
+                            ? "Paid"
+                            : transaction.status}
                         </Badge>
                         <Text as="p" variant="bodyMd" fontWeight="semibold">
-                          {formatCurrency(transaction.amount, transaction.currency)}
+                          {formatCurrency(
+                            transaction.amount,
+                            transaction.currency,
+                          )}
                         </Text>
                       </InlineStack>
                       <Text as="p" variant="bodySm" tone="subdued">
