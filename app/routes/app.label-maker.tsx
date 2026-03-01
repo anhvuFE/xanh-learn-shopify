@@ -301,21 +301,25 @@ export default function LabelMakerPage() {
       checked={selectedProducts.includes(product.id)}
       onChange={() => handleProductSelect(product.id)}
     />,
-    <InlineStack gap="300" blockAlign="center">
-      <Thumbnail
-        source={product.image || ImageIcon}
-        alt={product.title}
-        size="small"
-      />
-      <BlockStack gap="100">
-        <Text as="span" variant="bodyMd" fontWeight="semibold">
-          {product.title}
-        </Text>
-        <Text as="p" variant="bodySm" tone="subdued">
-          {product.variant}
-        </Text>
-      </BlockStack>
-    </InlineStack>,
+    <Box maxWidth="250">
+      <InlineStack gap="300" blockAlign="center">
+        <Thumbnail
+          source={product.image || ImageIcon}
+          alt={product.title}
+          size="small"
+        />
+        <Box minWidth="0" width="100%">
+          <BlockStack gap="100">
+            <Text as="span" variant="bodyMd" fontWeight="semibold" truncate>
+              {product.title}
+            </Text>
+            <Text as="p" variant="bodySm" tone="subdued" truncate>
+              {product.variant}
+            </Text>
+          </BlockStack>
+        </Box>
+      </InlineStack>
+    </Box>,
     product.sku,
     product.barcode,
     formatCurrency(product.price),
