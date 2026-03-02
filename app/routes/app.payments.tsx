@@ -604,92 +604,150 @@ export default function PaymentsPage() {
       <Layout>
         <Layout.Section>
           <BlockStack gap="600">
-            {/* Stats cards */}
-            <InlineStack gap="400" align="space-between" blockAlign="stretch">
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <InlineStack align="space-between">
-                      <Text as="h3" variant="headingMd" tone="subdued">
-                        Total Revenue
-                      </Text>
-                      <Icon source={ArrowUpIcon} tone="success" />
+            {/* Stats cards - Improved design with consistent sizing */}
+            <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '16px'
+              }}>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={ArrowUpIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Total Revenue
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {formatCurrency(stats.totalRevenue)}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="success">
+                          +12.5% from last month
+                        </Text>
+                      </BlockStack>
                     </InlineStack>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {formatCurrency(stats.totalRevenue)}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="success">
-                      +12.5% from last month
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <InlineStack align="space-between">
-                      <Text as="h3" variant="headingMd" tone="subdued">
-                        Pending
-                      </Text>
-                      <Icon source={AlertTriangleIcon} tone="warning" />
-                    </InlineStack>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="warning">
-                      {formatCurrency(stats.pendingAmount)}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      {transactions.filter(t => t.status === "pending").length} transactions
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
-
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <InlineStack align="space-between">
-                      <Text as="h3" variant="headingMd" tone="subdued">
-                        Processing Fees
-                      </Text>
-                      <Icon source={ArrowDownIcon} tone="critical" />
-                    </InlineStack>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="critical">
-                      {formatCurrency(stats.totalFees)}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      2.9% average rate
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
-
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <InlineStack align="space-between">
-                      <Text as="h3" variant="headingMd" tone="subdued">
-                        Next Payout
-                      </Text>
-                      <Icon source={CashDollarFilledIcon} tone="success" />
-                    </InlineStack>
-                    {stats.nextPayout ? (
-                      <>
-                        <Text as="p" variant="heading2xl" fontWeight="bold">
-                          {formatCurrency(stats.nextPayout.amount)}
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={AlertTriangleIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Pending
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {formatCurrency(stats.pendingAmount)}
                         </Text>
                         <Text as="p" variant="bodySm" tone="subdued">
-                          {formatDate(stats.nextPayout.scheduledDate)}
+                          {transactions.filter(t => t.status === "pending").length} transactions
                         </Text>
-                      </>
-                    ) : (
-                      <Text as="p" variant="bodyMd">
-                        No scheduled payouts
-                      </Text>
-                    )}
-                  </BlockStack>
-                </Box>
-              </Card>
-            </InlineStack>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
+
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={ArrowDownIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Processing Fees
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold" tone="critical">
+                          {formatCurrency(stats.totalFees)}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          2.9% average rate
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
+
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={CashDollarFilledIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Next Payout
+                        </Text>
+                        {stats.nextPayout ? (
+                          <>
+                            <Text as="p" variant="headingMd" fontWeight="bold">
+                              {formatCurrency(stats.nextPayout.amount)}
+                            </Text>
+                            <Text as="p" variant="bodySm" tone="subdued">
+                              {formatDate(stats.nextPayout.scheduledDate)}
+                            </Text>
+                          </>
+                        ) : (
+                          <Text as="p" variant="bodyMd">
+                            No scheduled payouts
+                          </Text>
+                        )}
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
+              </div>
+            </Box>
 
             {/* Disputed transactions warning */}
             {stats.disputedAmount > 0 && (
