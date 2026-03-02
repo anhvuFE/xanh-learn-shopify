@@ -402,84 +402,142 @@ export default function InventoryAlertsPage() {
                 </Banner>
               )}
 
-              {/* Stats Overview */}
-              <InlineGrid columns={{ xs: 2, md: 4 }} gap="400">
-                <Card>
-                  <Box padding="400">
-                    <BlockStack gap="200">
-                      <InlineStack align="space-between">
-                        <Text as="h3" variant="headingSm" tone="subdued">
-                          Critical Items
-                        </Text>
-                        <Icon source={AlertCircleIcon} tone="critical" />
+              {/* Stats Overview - Improved design */}
+              <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(4, 1fr)',
+                  gap: '16px'
+                }}>
+                  <Card>
+                    <Box padding="400">
+                      <InlineStack gap="300" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}>
+                            <Icon source={AlertCircleIcon} tone="base" />
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Critical Items
+                          </Text>
+                          <Text as="p" variant="headingMd" fontWeight="bold" tone="critical">
+                            {stats.criticalItems}
+                          </Text>
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Need immediate restock
+                          </Text>
+                        </BlockStack>
                       </InlineStack>
-                      <Text as="h2" variant="heading2xl" fontWeight="bold" tone="critical">
-                        {stats.criticalItems}
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Need immediate restock
-                      </Text>
-                    </BlockStack>
-                  </Box>
-                </Card>
+                    </Box>
+                  </Card>
 
-                <Card>
-                  <Box padding="400">
-                    <BlockStack gap="200">
-                      <InlineStack align="space-between">
-                        <Text as="h3" variant="headingSm" tone="subdued">
-                          Low Stock
-                        </Text>
-                        <Icon source={AlertCircleIcon} tone="warning" />
+                  <Card>
+                    <Box padding="400">
+                      <InlineStack gap="300" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}>
+                            <Icon source={AlertCircleIcon} tone="base" />
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Low Stock
+                          </Text>
+                          <Text as="p" variant="headingMd" fontWeight="bold" tone="warning">
+                            {stats.lowStockItems}
+                          </Text>
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Below reorder point
+                          </Text>
+                        </BlockStack>
                       </InlineStack>
-                      <Text as="h2" variant="heading2xl" fontWeight="bold" tone="warning">
-                        {stats.lowStockItems}
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Below reorder point
-                      </Text>
-                    </BlockStack>
-                  </Box>
-                </Card>
+                    </Box>
+                  </Card>
 
-                <Card>
-                  <Box padding="400">
-                    <BlockStack gap="200">
-                      <InlineStack align="space-between">
-                        <Text as="h3" variant="headingSm" tone="subdued">
-                          Out of Stock
-                        </Text>
-                        <Icon source={XIcon} tone="critical" />
+                  <Card>
+                    <Box padding="400">
+                      <InlineStack gap="300" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}>
+                            <Icon source={XIcon} tone="base" />
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Out of Stock
+                          </Text>
+                          <Text as="p" variant="headingMd" fontWeight="bold">
+                            {stats.outOfStock}
+                          </Text>
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Currently unavailable
+                          </Text>
+                        </BlockStack>
                       </InlineStack>
-                      <Text as="h2" variant="heading2xl" fontWeight="bold">
-                        {stats.outOfStock}
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Currently unavailable
-                      </Text>
-                    </BlockStack>
-                  </Box>
-                </Card>
+                    </Box>
+                  </Card>
 
-                <Card>
-                  <Box padding="400">
-                    <BlockStack gap="200">
-                      <InlineStack align="space-between">
-                        <Text as="h3" variant="headingSm" tone="subdued">
-                          Total Alerts
-                        </Text>
-                        <Icon source={NotificationIcon} tone="subdued" />
+                  <Card>
+                    <Box padding="400">
+                      <InlineStack gap="300" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexShrink: 0
+                          }}>
+                            <Icon source={NotificationIcon} tone="base" />
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Total Alerts
+                          </Text>
+                          <Text as="p" variant="headingMd" fontWeight="bold">
+                            {stats.totalAlerts}
+                          </Text>
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Active notifications
+                          </Text>
+                        </BlockStack>
                       </InlineStack>
-                      <Text as="h2" variant="heading2xl" fontWeight="bold">
-                        {stats.totalAlerts}
-                      </Text>
-                      <Text as="p" variant="bodySm" tone="subdued">
-                        Active notifications
-                      </Text>
-                    </BlockStack>
-                  </Box>
-                </Card>
-              </InlineGrid>
+                    </Box>
+                  </Card>
+                </div>
+              </Box>
 
               {/* Tabs Content */}
               <Card>
