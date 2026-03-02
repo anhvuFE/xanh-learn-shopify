@@ -226,33 +226,47 @@ export default function AnalyticsDashboardPage() {
     return change > 0 ? 'success' : 'critical';
   };
 
-  // Metric card component
+  // Metric card component - Improved design
   const MetricCard = ({ title, value, previousValue, change, format = 'currency', inverse = false }: any) => (
     <Card>
-      <Box padding="500">
-        <BlockStack gap="400">
-          <Text as="h3" variant="headingMd" tone="subdued">
-            {title}
-          </Text>
-          <Text as="h2" variant="heading3xl" fontWeight="bold">
-            {format === 'currency' ? formatCurrency(value) :
-             format === 'percentage' ? `${value}%` :
-             formatNumber(value)}
-          </Text>
-          <InlineStack gap="300" blockAlign="center">
-            <Box>
-              <Icon source={getTrendIcon(change)} tone={getTrendTone(change, inverse)} />
-            </Box>
+      <Box padding="400">
+        <InlineStack gap="300" blockAlign="center">
+          <Box>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '8px',
+              background: inverse && change > 0 ? 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)' :
+                         !inverse && change > 0 ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' :
+                         inverse && change <= 0 ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' :
+                         'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <Icon source={getTrendIcon(change)} tone="base" />
+            </div>
+          </Box>
+          <BlockStack gap="050">
+            <Text as="p" variant="bodySm" tone="subdued">
+              {title}
+            </Text>
+            <Text as="p" variant="headingLg" fontWeight="bold">
+              {format === 'currency' ? formatCurrency(value) :
+               format === 'percentage' ? `${value}%` :
+               formatNumber(value)}
+            </Text>
             <InlineStack gap="200" blockAlign="baseline">
-              <Text as="span" variant="bodyLg" tone={getTrendTone(change, inverse)} fontWeight="semibold">
+              <Text as="span" variant="bodySm" tone={getTrendTone(change, inverse)} fontWeight="semibold">
                 {formatPercentage(change)}
               </Text>
-              <Text as="span" variant="bodyMd" tone="subdued">
+              <Text as="span" variant="bodySm" tone="subdued">
                 vs previous period
               </Text>
             </InlineStack>
-          </InlineStack>
-        </BlockStack>
+          </BlockStack>
+        </InlineStack>
       </Box>
     </Card>
   );
@@ -465,52 +479,54 @@ export default function AnalyticsDashboardPage() {
               </Card>
             )}
 
-            {/* Main Metrics */}
-            <InlineGrid columns={{ xs: 1, sm: 2, md: 3 }} gap="400">
-              <MetricCard
-                title="Total Revenue"
-                value={data.overview.revenue.current}
-                previousValue={data.overview.revenue.previous}
-                change={data.overview.revenue.change}
-                format="currency"
-              />
-              <MetricCard
-                title="Total Orders"
-                value={data.overview.orders.current}
-                previousValue={data.overview.orders.previous}
-                change={data.overview.orders.change}
-                format="number"
-              />
-              <MetricCard
-                title="New Customers"
-                value={data.overview.customers.current}
-                previousValue={data.overview.customers.previous}
-                change={data.overview.customers.change}
-                format="number"
-              />
-              <MetricCard
-                title="Avg Order Value"
-                value={data.overview.averageOrderValue.current}
-                previousValue={data.overview.averageOrderValue.previous}
-                change={data.overview.averageOrderValue.change}
-                format="currency"
-              />
-              <MetricCard
-                title="Conversion Rate"
-                value={data.overview.conversionRate.current}
-                previousValue={data.overview.conversionRate.previous}
-                change={data.overview.conversionRate.change}
-                format="percentage"
-              />
-              <MetricCard
-                title="Cart Abandonment"
-                value={data.overview.cartAbandonment.current}
-                previousValue={data.overview.cartAbandonment.previous}
-                change={data.overview.cartAbandonment.change}
-                format="percentage"
-                inverse={true}
-              />
-            </InlineGrid>
+            {/* Main Metrics - Improved design */}
+            <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+              <InlineGrid columns={{ xs: 1, sm: 2, md: 3 }} gap="400">
+                <MetricCard
+                  title="Total Revenue"
+                  value={data.overview.revenue.current}
+                  previousValue={data.overview.revenue.previous}
+                  change={data.overview.revenue.change}
+                  format="currency"
+                />
+                <MetricCard
+                  title="Total Orders"
+                  value={data.overview.orders.current}
+                  previousValue={data.overview.orders.previous}
+                  change={data.overview.orders.change}
+                  format="number"
+                />
+                <MetricCard
+                  title="New Customers"
+                  value={data.overview.customers.current}
+                  previousValue={data.overview.customers.previous}
+                  change={data.overview.customers.change}
+                  format="number"
+                />
+                <MetricCard
+                  title="Avg Order Value"
+                  value={data.overview.averageOrderValue.current}
+                  previousValue={data.overview.averageOrderValue.previous}
+                  change={data.overview.averageOrderValue.change}
+                  format="currency"
+                />
+                <MetricCard
+                  title="Conversion Rate"
+                  value={data.overview.conversionRate.current}
+                  previousValue={data.overview.conversionRate.previous}
+                  change={data.overview.conversionRate.change}
+                  format="percentage"
+                />
+                <MetricCard
+                  title="Cart Abandonment"
+                  value={data.overview.cartAbandonment.current}
+                  previousValue={data.overview.cartAbandonment.previous}
+                  change={data.overview.cartAbandonment.change}
+                  format="percentage"
+                  inverse={true}
+                />
+              </InlineGrid>
+            </Box>
 
             {/* Tabs Content */}
             <Card>
