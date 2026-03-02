@@ -584,60 +584,143 @@ export default function PreordersPage() {
       <Layout>
         <Layout.Section>
           <BlockStack gap="600">
-            {/* Stats cards */}
-            <InlineStack gap="400" align="space-between" blockAlign="stretch">
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Active Pre-orders
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {stats.totalPreorders}
-                    </Text>
-                  </BlockStack>
+            {/* Stats cards - Improved design */}
+            <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+              <InlineStack gap="600" wrap={false}>
+                <Box width="100%">
+                  <Card>
+                    <BlockStack gap="200">
+                      <InlineStack gap="200" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #667EEA 0%, #764BA2 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                              <path d="M3 3h14v14H3V3zm2 2v10h10V5H5z"/>
+                            </svg>
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Active Pre-orders
+                          </Text>
+                          <Text as="p" variant="headingLg" fontWeight="bold">
+                            {stats.totalPreorders}
+                          </Text>
+                        </BlockStack>
+                      </InlineStack>
+                    </BlockStack>
+                  </Card>
                 </Box>
-              </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Ready to Ship
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="success">
-                      {stats.pendingFulfillment}
-                    </Text>
-                  </BlockStack>
+                <Box width="100%">
+                  <Card>
+                    <BlockStack gap="200">
+                      <InlineStack gap="200" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #56CCB7 0%, #2FB344 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                              <path d="M4 6h12l-1 10H5L4 6zm6-4h0v2h4V2h-4zm-2 0H6v2h2V2zm8 2v2H4V4h2V2a2 2 0 012-2h4a2 2 0 012 2v2h2z"/>
+                            </svg>
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Ready to Ship
+                          </Text>
+                          <InlineStack gap="200" blockAlign="center">
+                            <Text as="p" variant="headingLg" fontWeight="bold" tone="success">
+                              {stats.pendingFulfillment}
+                            </Text>
+                            {stats.pendingFulfillment > 0 && (
+                              <Badge tone="success" size="small">Action needed</Badge>
+                            )}
+                          </InlineStack>
+                        </BlockStack>
+                      </InlineStack>
+                    </BlockStack>
+                  </Card>
                 </Box>
-              </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Deposits Collected
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {formatCurrency(stats.totalRevenue)}
-                    </Text>
-                  </BlockStack>
+                <Box width="100%">
+                  <Card>
+                    <BlockStack gap="200">
+                      <InlineStack gap="200" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #667EEA 0%, #4A90E2 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                              <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 13h-2v-2h2v2zm0-4h-2V7h2v4z"/>
+                            </svg>
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Deposits Collected
+                          </Text>
+                          <Text as="p" variant="headingLg" fontWeight="bold">
+                            {formatCurrency(stats.totalRevenue)}
+                          </Text>
+                        </BlockStack>
+                      </InlineStack>
+                    </BlockStack>
+                  </Card>
                 </Box>
-              </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Upcoming Releases
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="warning">
-                      {stats.upcomingReleases}
-                    </Text>
-                  </BlockStack>
+                <Box width="100%">
+                  <Card>
+                    <BlockStack gap="200">
+                      <InlineStack gap="200" blockAlign="center">
+                        <Box>
+                          <div style={{
+                            width: '40px',
+                            height: '40px',
+                            borderRadius: '8px',
+                            background: 'linear-gradient(135deg, #FFA726 0%, #FB8C00 100%)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                              <path d="M17 3h-1V1h-2v2H6V1H4v2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V8h14v9z"/>
+                            </svg>
+                          </div>
+                        </Box>
+                        <BlockStack gap="050">
+                          <Text as="p" variant="bodySm" tone="subdued">
+                            Upcoming Releases
+                          </Text>
+                          <Text as="p" variant="headingLg" fontWeight="bold">
+                            {stats.upcomingReleases}
+                          </Text>
+                        </BlockStack>
+                      </InlineStack>
+                    </BlockStack>
+                  </Card>
                 </Box>
-              </Card>
-            </InlineStack>
+              </InlineStack>
+            </Box>
 
             {/* Pre-orders with ready status */}
             {preorders.filter(p => p.status === "ready").length > 0 && (
