@@ -626,88 +626,186 @@ export default function ReturnsPage() {
       <Layout>
         <Layout.Section>
           <BlockStack gap="600">
-            {/* Stats cards */}
-            <InlineGrid columns={{ xs: 1, sm: 2, md: 5 }} gap="400">
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Total Returns
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {stats.totalReturns}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      This month
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+            {/* Stats cards - Improved design */}
+            <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(5, 1fr)',
+                gap: '16px'
+              }}>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M4 4h12v12H4V4zm2 2v8h8V6H6z"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Total Returns
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {stats.totalReturns}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          This month
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Pending Approval
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="warning">
-                      {stats.pendingApproval}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      Needs review
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm1 13h-2v-2h2v2zm0-4h-2V7h2v4z"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Pending Approval
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold" tone="warning">
+                          {stats.pendingApproval}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Needs review
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Awaiting Return
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="info">
-                      {stats.awaitingReturn}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      In transit
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M3 10a7 7 0 1114 0v0a7 7 0 01-14 0v0zM10 6v4l3 3"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Awaiting Return
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold" tone="info">
+                          {stats.awaitingReturn}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          In transit
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Total Refunded
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {formatCurrency(stats.totalRefunds)}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      This month
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm-1 11.5v2h2v-2h1c.55 0 1-.45 1-1s-.45-1-1-1h-3v-1h3V8.5h-2v-2H8v2H7c-.55 0-1 .45-1 1s.45 1 1 1h3v1H7v1.5h2z"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Total Refunded
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {formatCurrency(stats.totalRefunds)}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          This month
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Return Rate
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {stats.returnRate}%
-                    </Text>
-                    <Text as="p" variant="bodySm" tone={stats.returnRate > 5 ? "critical" : "success"}>
-                      {stats.returnRate > 5 ? "Above average" : "Below average"}
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
-            </InlineGrid>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: stats.returnRate > 5
+                            ? 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)'
+                            : 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M3 17h14v-2H3v2zm0-5h14v-2H3v2zm0-7v2h14V5H3z"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Return Rate
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {stats.returnRate}%
+                        </Text>
+                        <Text as="p" variant="bodySm" tone={stats.returnRate > 5 ? "critical" : "success"}>
+                          {stats.returnRate > 5 ? "Above average" : "Below average"}
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
+              </div>
+            </Box>
 
             {/* Pending returns alert */}
             {stats.pendingApproval > 0 && (
