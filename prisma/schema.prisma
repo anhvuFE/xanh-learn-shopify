@@ -9,8 +9,8 @@ generator client {
 // enough when changing adapters.
 // See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
 datasource db {
-  provider = "sqlite"
-  url      = "file:dev.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Session {
@@ -31,4 +31,161 @@ model Session {
   emailVerified       Boolean?  @default(false)
   refreshToken        String?
   refreshTokenExpires DateTime?
+}
+
+// Product Model
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  price       Float
+  compareAtPrice Float?
+  sku         String   @unique
+  barcode     String?
+  inventory   Int      @default(0)
+  vendor      String?
+  productType String?
+  tags        String[]
+  images      String[]
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sku])
+  @@index([status])
+}
+
+// Customer Model
+model Customer {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  firstName     String
+  lastName      String
+  phone         String?
+  acceptsMarketing Boolean @default(false)
+  totalSpent    Float    @default(0)
+  ordersCount   Int      @default(0)
+  tags          String[]
+  note          String?
+  verifiedEmail Boolean  @default(false)
+  addresses     Address[]
+  orders        Order[]
+  reviews       Review[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([email])
+}
+
+// Address Model
+model Address {
+  id           String   @id @default(cuid())
+  customerId   String
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  firstName    String
+  lastName     String
+  company      String?
+  address1     String
+  address2     String?
+  city         String
+  province     String
+  country      String
+  zip          String
+  phone        String?
+  isDefault    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Order Model
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  customerId      String
+  customer        Customer    @relation(fields: [customerId], references: [id])
+  email           String
+  financialStatus String      @default("pending")
+  fulfillmentStatus String    @default("unfulfilled")
+  totalPrice      Float
+  subtotalPrice   Float
+  totalTax        Float       @default(0)
+  totalDiscount   Float       @default(0)
+  currency        String      @default("USD")
+  paymentMethod   String?
+  shippingMethod  String?
+  shippingPrice   Float       @default(0)
+  note            String?
+  tags            String[]
+  cancelReason    String?
+  cancelledAt     DateTime?
+  lineItems       OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([orderNumber])
+  @@index([customerId])
+  @@index([financialStatus])
+  @@index([fulfillmentStatus])
+}
+
+// Order Line Item Model
+model OrderItem {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String?
+  title         String
+  variant       String?
+  quantity      Int
+  price         Float
+  totalDiscount Float    @default(0)
+  sku           String?
+  vendor        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+// Review Model
+model Review {
+  id          String   @id @default(cuid())
+  productId   String
+  customerId  String
+  customer    Customer @relation(fields: [customerId], references: [id])
+  rating      Int
+  title       String
+  content     String?
+  status      String   @default("pending") // pending, published, rejected
+  helpful     Int      @default(0)
+  notHelpful  Int      @default(0)
+  featured    Boolean  @default(false)
+  verified    Boolean  @default(false)
+  images      String[]
+  adminReply  String?
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([productId])
+  @@index([customerId])
+  @@index([status])
+}
+
+// Inventory Alert Model
+model InventoryAlert {
+  id          String   @id @default(cuid())
+  productId   String
+  sku         String
+  productName String
+  currentStock Int
+  threshold   Int
+  alertType   String   // critical, low, restock
+  status      String   @default("active") // active, resolved, ignored
+  resolvedAt  DateTime?
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([productId])
+  @@index([alertType])
+  @@index([status])
 }

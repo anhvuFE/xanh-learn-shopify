@@ -1,6 +1,9 @@
 {
   "name": "xanh-learn",
   "private": true,
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "scripts": {
     "build": "remix vite:build",
     "dev": "shopify app dev",
@@ -23,7 +26,7 @@
     "node": ">=20.19 <22 || >=22.12"
   },
   "dependencies": {
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "5.22.0",
     "@remix-run/dev": "^2.16.1",
     "@remix-run/fs-routes": "^2.16.1",
     "@remix-run/node": "^2.16.1",
@@ -34,7 +37,7 @@
     "@shopify/shopify-app-remix": "^4.1.0",
     "@shopify/shopify-app-session-storage-prisma": "^8.0.0",
     "isbot": "^5.1.0",
-    "prisma": "^6.2.1",
+    "prisma": "5.22.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite-tsconfig-paths": "^5.0.1",
@@ -51,6 +54,7 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^10.0.1",
     "prettier": "^3.2.4",
+    "tsx": "^4.21.0",
     "typescript": "^5.2.2",
     "vite": "^6.2.2"
   },
