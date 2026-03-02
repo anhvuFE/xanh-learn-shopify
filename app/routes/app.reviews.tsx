@@ -37,6 +37,7 @@ import {
   ThumbsUpIcon,
   ThumbsDownIcon,
   FlagIcon,
+  ClockIcon,
 } from "@shopify/polaris-icons";
 import { useState, useCallback, useMemo } from "react";
 import { useLoaderData, useNavigate } from "@remix-run/react";
@@ -670,75 +671,147 @@ export default function ReviewsPage() {
       <Layout>
         <Layout.Section>
           <BlockStack gap="600">
-            {/* Stats cards */}
-            <InlineGrid columns={{ xs: 1, sm: 2, md: 4 }} gap="400">
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Average Rating
-                    </Text>
-                    <InlineStack gap="200" blockAlign="center">
-                      <Text as="p" variant="heading2xl" fontWeight="bold">
-                        {stats.averageRating.toFixed(1)}
-                      </Text>
-                      {renderStars(Math.round(stats.averageRating))}
+            {/* Stats cards - Improved design */}
+            <Box background="bg-surface-secondary" padding="600" borderRadius="300">
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(4, 1fr)',
+                gap: '16px'
+              }}>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={StarFilledIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Average Rating
+                        </Text>
+                        <InlineStack gap="100" blockAlign="center">
+                          <Text as="p" variant="headingMd" fontWeight="bold">
+                            {stats.averageRating.toFixed(1)}
+                          </Text>
+                          {renderStars(Math.round(stats.averageRating))}
+                        </InlineStack>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Based on {stats.totalReviews} reviews
+                        </Text>
+                      </BlockStack>
                     </InlineStack>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      Based on {stats.totalReviews} reviews
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Total Reviews
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold">
-                      {stats.totalReviews}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="success">
-                      +15% from last month
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                            <path d="M4 5h12v10H4V5zm2 2v6h8V7H6z"/>
+                          </svg>
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Total Reviews
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold">
+                          {stats.totalReviews}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="success">
+                          +15% from last month
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Pending Review
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="warning">
-                      {stats.pendingReviews}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      Needs moderation
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={ClockIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Pending Review
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold" tone="warning">
+                          {stats.pendingReviews}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Needs moderation
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
 
-              <Card>
-                <Box padding="400">
-                  <BlockStack gap="200">
-                    <Text as="h3" variant="headingMd" tone="subdued">
-                      Reported
-                    </Text>
-                    <Text as="p" variant="heading2xl" fontWeight="bold" tone="critical">
-                      {stats.reportedReviews}
-                    </Text>
-                    <Text as="p" variant="bodySm" tone="subdued">
-                      Requires attention
-                    </Text>
-                  </BlockStack>
-                </Box>
-              </Card>
-            </InlineGrid>
+                <Card>
+                  <Box padding="400">
+                    <InlineStack gap="300" blockAlign="center">
+                      <Box>
+                        <div style={{
+                          width: '40px',
+                          height: '40px',
+                          borderRadius: '8px',
+                          background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0
+                        }}>
+                          <Icon source={FlagIcon} tone="base" />
+                        </div>
+                      </Box>
+                      <BlockStack gap="050">
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Reported
+                        </Text>
+                        <Text as="p" variant="headingMd" fontWeight="bold" tone="critical">
+                          {stats.reportedReviews}
+                        </Text>
+                        <Text as="p" variant="bodySm" tone="subdued">
+                          Requires attention
+                        </Text>
+                      </BlockStack>
+                    </InlineStack>
+                  </Box>
+                </Card>
+              </div>
+            </Box>
 
             {/* Rating distribution */}
             <Card>
@@ -753,8 +826,9 @@ export default function ReviewsPage() {
                         <Box minWidth="100">
                           <InlineStack gap="100" blockAlign="center">
                             <Text as="span" variant="bodyMd">
-                              {rating} star{rating !== 1 ? "s" : ""}
+                              {rating}
                             </Text>
+                            {renderStars(rating)}
                           </InlineStack>
                         </Box>
                         <Box fill>
